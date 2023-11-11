@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ChatGPT Interface</title>
+    <title>Chat Ucaldas IA</title>
     <!-- Agrega enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
@@ -36,7 +36,19 @@
 </head>
 <body>
     
+<h1>Datos Obtenidos post:</h1>
+    @if(isset($datapost))
+        <pre>{{ var_dump($datapost) }}</pre>
+    @else
+        <p>No hay datos</p>
+    @endif
 
+    <h1>Datos Obtenidos get:</h1>
+    @if(isset($dataget))
+        <pre>{{ var_dump($dataget) }}</pre>
+    @else
+        <p>No hay datos</p>
+    @endif
 <!-- Contenedor principal del chat -->
 <div class="container mt-4" id="chat-container">
     <!-- Barra lateral izquierda (menú) -->
