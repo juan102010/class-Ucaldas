@@ -36,12 +36,7 @@
 </head>
 <body>
     
-<h1>Datos Obtenidos post:</h1>
-    @if(isset($datapost))
-        <pre>{{ var_dump($datapost) }}</pre>
-    @else
-        <p>No hay datos</p>
-    @endif
+
 
     <h1>Datos Obtenidos get:</h1>
     @if(isset($dataget))
@@ -75,7 +70,12 @@
     <div style="float: right; width: 80%;">
         <!-- Historial de mensajes -->
         <div id="chat-messages">
-            <!-- Mensajes se agregarán aquí dinámicamente -->
+        <h1>Datos Obtenidos post:</h1>
+    @if(isset($datapost))
+        <pre>{{ var_dump($datapost) }}</pre>
+    @else
+        <p>No hay datos</p>
+    @endif
         </div>
 
         <!-- Barra de entrada de usuario -->
