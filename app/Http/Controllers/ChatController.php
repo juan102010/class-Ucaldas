@@ -9,7 +9,7 @@ class ChatController extends Controller
 {
     public function datapost(){
         $body = [
-            "SeccionId" => "9bc218e0-7cc6-41d7-ab46-1c2c48257ebe",
+            "SeccionId" => "81d5d581-5160-4569-a114-54dfa8aeaeee",
             "Question" => [
                 "Messages" => [
                     [
@@ -34,7 +34,7 @@ class ChatController extends Controller
 
     public function dataget(){
         $body = [
-                "SeccionId" => "3fa85f64-5717-4562-b3fc-2c963f66afa1",
+                "SeccionId" => "3fa85f64-5717-4562-b3fc-2c963f66afa2",
                 "FromDate"=> "2023-10-31T01:39:43.358Z"          
         ];
     
