@@ -9,7 +9,36 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="resources/css/chat.css">
+
+    <style>
+        /* Estilos adicionales para la interfaz de chat */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #chat-container {
+            max-width: 1250px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #chat-messages {
+            height: 350px;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color: #fff;
+        }
+        #alert{
+            color:red;
+        }
+        #user-input {
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
     
@@ -35,10 +64,18 @@
         </div>
 
         <!-- Barra de entrada de usuario -->
-        <div class="input-group mt-auto">
-            <input type="text" class="form-control" placeholder="Escribe un mensaje..." id="user-message">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onClick="createChat()">Enviar</button>
+
+        <p id="alert">
+
+        </p>
+        <div id="user-input">
+            <div class="input-group">
+                <input id="pregunta" type="text" class="form-control" placeholder="Escribe un mensaje...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onClick="postChat()">Enviar</button>
+                    <button class="btn btn-primary" type="button" onClick="idSeccion()">nuevo</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -48,24 +85,36 @@
 
 </body>
 <script>
-    function createChat(){
+    var id_seccion="12";
+    function idSeccion() {
         
+        var prueba=id_seccion;
+        prueba=prueba+1;
+        id_seccion=prueba;
+        
+        console.log(id_seccion);
+    }
+    function postChat(){
+        var pregunta = $("#pregunta").val();
         var headers = {
                 'ApiKey': 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb'
             };
         var datos = {
-                    "SeccionId": "81d5d581-5160-4569-a114-54dfa8aeaeee",
+                    "SeccionId": id_seccion,
                     "Question": {
                         "Messages": [
                             {
                                 "role": "user",
-                                "content": "como me puedes ayudarme"
+                                "content": pregunta
                             }
                         ]
                     },
                     "IncludeHistory": true
             };
-        $.ajax({
+        if (!pregunta) {
+            $("#alert").html("mk no se olvideo el hp textoooo");
+        }else{
+            $.ajax({
                 type: 'POST',
                 url: 'https://ucaldaschatia-production.up.railway.app/api/v1/completion',
                 data: JSON.stringify(datos), // Convertir a JSON
@@ -82,6 +131,36 @@
                     // Puedes manejar el error aquí
                 }
             });
+        }
+        
+    }
+
+    function getChat(){
+        var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb';
+    var seccionId = '81d5d581-5160-4569-a114-54dfa8aeaeee';
+    var fromDate = '2023-11-11T04:05:30.892Z';
+
+    // Construye la URL con los parámetros de consulta
+    var url = 'https://ucaldaschatia-production.up.railway.app/api/v1/completion';
+    url += '?SeccionId=' + encodeURIComponent(seccionId);
+    url += '&FromDate=' + encodeURIComponent(fromDate);
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: 'application/json',
+        headers: {
+            'ApiKey': apiKey
+        },
+        success: function (response) {
+            console.log('Solicitud exitosa:', response);
+            // Puedes manejar la respuesta del servidor aquí
+        },
+        error: function (error) {
+            console.error('Error en la solicitud:', error);
+            // Puedes manejar el error aquí
+        }
+    });
     }
 
     function mostrarInformacion(data) {
@@ -113,5 +192,6 @@
     }
 }
 </script>
+
 
 </html>
