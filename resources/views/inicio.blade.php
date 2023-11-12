@@ -29,7 +29,9 @@
             padding: 10px;
             background-color: #fff;
         }
-
+        #alert{
+            color:red;
+        }
         #user-input {
             padding: 10px;
             background-color: #fff;
@@ -58,11 +60,15 @@
         </div>
 
         <!-- Barra de entrada de usuario -->
+        <p id="alert">
+
+        </p>
         <div id="user-input">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Escribe un mensaje...">
+                <input id="pregunta" type="text" class="form-control" placeholder="Escribe un mensaje...">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" onClick="createChat()">Enviar</button>
+                    <button class="btn btn-primary" type="button" onClick="postChat()">Enviar</button>
+                    <button class="btn btn-primary" type="button" onClick="idSeccion()">nuevo</button>
                 </div>
             </div>
         </div>
@@ -73,24 +79,36 @@
 
 </body>
 <script>
-    function createChat(){
+    var id_seccion="12";
+    function idSeccion() {
         
+        var prueba=id_seccion;
+        prueba=prueba+1;
+        id_seccion=prueba;
+        
+        console.log(id_seccion);
+    }
+    function postChat(){
+        var pregunta = $("#pregunta").val();
         var headers = {
                 'ApiKey': 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb'
             };
         var datos = {
-                    "SeccionId": "81d5d581-5160-4569-a114-54dfa8aeaeee",
+                    "SeccionId": id_seccion,
                     "Question": {
                         "Messages": [
                             {
                                 "role": "user",
-                                "content": "como me puedes ayudarme"
+                                "content": pregunta
                             }
                         ]
                     },
                     "IncludeHistory": true
             };
-        $.ajax({
+        if (!pregunta) {
+            $("#alert").html("mk no se olvideo el hp textoooo");
+        }else{
+            $.ajax({
                 type: 'POST',
                 url: 'https://ucaldaschatia-production.up.railway.app/api/v1/completion',
                 data: JSON.stringify(datos), // Convertir a JSON
@@ -105,7 +123,38 @@
                     // Puedes manejar el error aquí
                 }
             });
+        }
+        
+    }
+
+    function getChat(){
+        var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb';
+    var seccionId = '81d5d581-5160-4569-a114-54dfa8aeaeee';
+    var fromDate = '2023-11-11T04:05:30.892Z';
+
+    // Construye la URL con los parámetros de consulta
+    var url = 'https://ucaldaschatia-production.up.railway.app/api/v1/completion';
+    url += '?SeccionId=' + encodeURIComponent(seccionId);
+    url += '&FromDate=' + encodeURIComponent(fromDate);
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: 'application/json',
+        headers: {
+            'ApiKey': apiKey
+        },
+        success: function (response) {
+            console.log('Solicitud exitosa:', response);
+            // Puedes manejar la respuesta del servidor aquí
+        },
+        error: function (error) {
+            console.error('Error en la solicitud:', error);
+            // Puedes manejar el error aquí
+        }
+    });
     }
 </script>
+
 
 </html>
