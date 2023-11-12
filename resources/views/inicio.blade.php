@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Chat Ucaldas IA</title>
         <!-- Agrega enlaces a los archivos CSS de Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
         /* Estilos adicionales para la interfaz de chat */
@@ -46,9 +46,7 @@
         <h5>Menú</h5>
         <!-- Agrega aquí tus elementos de menú -->
         <ul>
-        <li class="nav-item"><a class="nav-link" href="/">Ubicacion UCaldas</a></li>
-              
-                    
+                        
         </ul>
     </div>
 
@@ -76,38 +74,37 @@
 </body>
 <script>
     function createChat(){
-        var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2af';
+        
+        var headers = {
+                'ApiKey': 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb'
+            };
+        var datos = {
+                    "SeccionId": "81d5d581-5160-4569-a114-54dfa8aeaeee",
+                    "Question": {
+                        "Messages": [
+                            {
+                                "role": "user",
+                                "content": "como me puedes ayudarme"
+                            }
+                        ]
+                    },
+                    "IncludeHistory": true
+            };
         $.ajax({
-            url:"https://ucaldaschatia-production.up.railway.app/api/v1/completion",
-            method:"POST",
-            dataType:"json",
-            xhrFields: {
-                    withCredentials: true // Esta opción permite enviar las cookies
+                type: 'POST',
+                url: 'https://ucaldaschatia-production.up.railway.app/api/v1/completion',
+                data: JSON.stringify(datos), // Convertir a JSON
+                contentType: 'application/json', // Tipo de contenido
+                headers: headers,
+                success: function(response) {
+                    console.log('Solicitud exitosa:', response);
+                    // Puedes manejar la respuesta del servidor aquí
                 },
-            headers:{
-                'Authorization': 'Apikey '+ apiKey
-            },
-            data: {
-    "SeccionId": "3fa85f64-5717-4562-b3fc-2c963f66afa10",
-    "Question": {
-        "Messages": [
-            {
-                "role": "user",
-                "content": "4+4"
-            }
-        ]
-    },
-    "IncludeHistory": true
-},
-            
-            contentType:'aplication/json',
-            success:function(response){
-                console.log(response);
-            },
-            error:function(xhr,status,error){
-                console.log(error);
-            }
-        });
+                error: function(error) {
+                    console.error('Error en la solicitud:', error);
+                    // Puedes manejar el error aquí
+                }
+            });
     }
 </script>
 
