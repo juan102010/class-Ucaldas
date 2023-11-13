@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
+
+    
     public function datapost(){
         $body = [
             "SeccionId" => "81d5d581-5160-4569-a114-54dfa8aeaeee",
