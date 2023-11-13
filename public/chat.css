@@ -1,0 +1,31 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.result {
+    height: 60vh; /* Establece la altura máxima del div */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    border: 1px solid #ccc; /* Opcional: Añade un borde para mayor claridad */
+    padding: 1px; /* Opcional: Agrega relleno para un mejor aspecto */
+
+}
+
+.msg1 {
+    background-color: red;
+    padding: 1%;
+    color: white;
+    margin-left: 10px;
+    width: 90%;
+    text-align: right;
+}
+
+.msg2 {
+    background-color: blue;
+    margin: 2px;
+    padding: 1%;
+    color: white;
+}
+
+.p-4{
+    float: right; width: 75%; height: 570px; overflow-y: auto; border: 1px solid #ccc; border-radius: 8px;
+}
