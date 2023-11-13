@@ -12,23 +12,29 @@
         <link rel="stylesheet" href="{{ asset('/chat.css')}}">
 </head>
 <body>
-    
+
+<header>
+        <h1></h1>
+        <nav>
+            <ul>
+            <li><h6>Chat Universidad de caldas</h6></li>
+            <li><a onClick="idSeccion()">Nuevo</a></li>
+            <li style="float:right"><a class="active" href="https://www.ucaldas.edu.co/portal/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
 <!-- Contenedor principal del chat -->
-<div class="container">
+
     
+
     <!-- Barra lateral izquierda (menú) -->
-    <div class="d-none d-md-block bg-dark text-white p-5" >
+    <div class="d-none d-md-block text-white p-5" >
         <h5>Asistente Virtual</h5>
         <!-- Agrega aquí tus elementos de menú -->
-
-        <ul class="list-unstyled">
-            <!-- Elementos de menú -->
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Materias</a></li>
-            <li><a href="#">Calificaciones</a></li>
-            
-        </ul>
+        <div id="listChat">
         
+        </div>
             <button class="btn btn-primary" type="button" onClick="idSeccion()">nuevo</button>
     </div>
 
@@ -48,14 +54,19 @@
         <div class="input-group mt-auto">
             <input id="pregunta" type="text" class="form-control" placeholder="Escribe un mensaje..." id="user-message">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onClick="postChat()">Enviar</button>
+                <button class="btn btn-primary" type="button" onClick="post Chat()">Enviar</button>
             </div>
         </div>
     </div>
-</div>
+
+</main>
 
 
-
+<br>    
+    <footer id="footer">
+        
+        <p>&copy; 2023 Universidad de caldas chatAI</p>
+    </footer>
 <!-- Agrega enlaces a los archivos JavaScript de Bootstrap y jQuery -->
 
 </body>
@@ -110,9 +121,9 @@
         
     }
 
-    function getChat(){
+    function getChat(seccionid){
         var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb';
-    var seccionId = '81d5d581-5160-4569-a114-54dfa8aeaeee';
+    var seccionId = seccionid;
     var fromDate = '2023-11-11T04:05:30.892Z';
 
     // Construye la URL con los parámetros de consulta
@@ -130,6 +141,7 @@
         success: function (response) {
             console.log('Solicitud exitosa:', response);
             // Puedes manejar la respuesta del servidor aquí
+            mostrarInformacionInicio(response)
         },
         error: function (error) {
             console.error('Error en la solicitud:', error);
@@ -166,7 +178,56 @@
             }
         }
 }
+
+
+function mostrarInformacionInicio(data) {
+
+var resultadoElement = document.getElementById('result');
+
+// Limpia el contenido previo del div
+resultadoElement.innerHTML = '';
+
+
+const questions = data.Result.Data.AnswerResult.Questions;
+const answers = data.Result.Data.AnswerResult.Answers;
+
+// Recorre las preguntas e imprime las preguntas y respuestas correspondientes
+for (let i = 0; i < questions.length; i++) {
+    const question = questions[i];
+    const answer = answers.find(a => a.TransactId === question.TransactId);
+
+    if (answer) {
+
+        $("#result").append('<div class="msg1">' +
+        question.Messages[0].Content + '</div>');
+
+        $("#result").append('<div class="msg2">' +
+        answer.Messages[0].Content + '</div>');
+
+        
+    }
+}
+}
+
+function listarChats(){
+    chats.forEach(function(chat) {
+                            
+    $("#listChat").append('<p onclick="getChat(' + chat.id+ ', this)" >Chat: ' + chat.message + '</p>');
+
+    });
+}
+var chats = [
+    { id: 12, message: "Hola, ¿cómo estás?" },
+    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
+    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" }
+    // Agrega más objetos de chat según sea necesario
+  ];
+$(document).ready(function() {
+    getChat(12);
+    listarChats();
+});
 </script>
 
+    
 
 </html>
