@@ -1,5 +1,10 @@
 body {
     background-color: #f8f9fa;
+    background-image: url();
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 20px;
 }
 
 .result {
@@ -11,21 +16,21 @@ body {
 }
 
 .msg1 {
-    border-radius: 15px 50px 30px;
-    background-color: red;
+    border-radius: 1px 30px 1px;
+    background-color: rgb(203, 227, 226);
     padding: 2%;
-    color: white;
+    color: black;
     margin-left: 10px;
     width: 90%;
     text-align: right;
 }
 
 .msg2 {
-    border-radius: 15px 50px 30px;
-    background-color: blue;
+    border-radius: 1px 30px 1px;
+    background-color: rgb(217, 218, 227);
     margin: 2px;
     padding: 2%;
-    color: white;
+    color: black;
 }
 
 .p-4{
@@ -46,9 +51,72 @@ body {
     border-radius: 8px;
     margin-top: 25px; 
     margin-left:5px;
+    text-align: center;
+    background-color: #003B70;
 }
 .list-unstyled{
-    width:130px;
+    align-content: center;
+    width:220px;
     height: 300px;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #003B70;
+    text-decoration: none;
+    overflow-y: auto;
+  }
+  
+  li {
+    float: left;
+    border-right: 1px solid #bbb;
+  }
+  
+  li a {
+    display: block;
+    color: #D7B860;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+
+
+
+  li h6 {
+    display: block;
+    color: #D7B860;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    color: #D7B860;
+    background-color: #124878;
+  }
+
+  li:last-child {
+    border-right: none;
+  }
+
+#footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn {
+    color: #D7B860;
+    background-color: #133f65;
+    margin-left: 3px;
+}
+
+.btn:hover {
+    color: #D7B860;
+    background-color: #124878;
+    margin-left: 3px;
+}
