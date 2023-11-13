@@ -17,8 +17,7 @@
         <h1></h1>
         <nav>
             <ul>
-            <li><h6>Chat Universidad de caldas</h6></li>
-            <li><a onClick="idSeccion()">Nuevo</a></li>
+            <li><h6>Chat Universidad de caldas</h6></li>            
             <li style="float:right"><a class="active" href="https://www.ucaldas.edu.co/portal/">About</a></li>
             </ul>
         </nav>
@@ -54,7 +53,7 @@
         <div class="input-group mt-auto">
             <input id="pregunta" type="text" class="form-control" placeholder="Escribe un mensaje..." id="user-message">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onClick="post Chat()">Enviar</button>
+                <button class="btn btn-primary" type="button" onClick="postChat()">Enviar</button>
             </div>
         </div>
     </div>
@@ -98,7 +97,7 @@
                     "IncludeHistory": true
             };
         if (!pregunta) {
-            $("#alert").html("mk no se olvideo el hp textoooo");
+            $("#alert").html("Por favor ingresar su pregunta");
         }else{
             $.ajax({
                 type: 'POST',
@@ -212,11 +211,23 @@ for (let i = 0; i < questions.length; i++) {
 function listarChats(){
     chats.forEach(function(chat) {
                             
-    $("#listChat").append('<p onclick="getChat(' + chat.id+ ', this)" >Chat: ' + chat.message + '</p>');
+    $("#listChat").append('<p class="list" onclick="getChat(' + chat.id+ ', this)" >Chat: ' + chat.message + '</p>');
 
     });
 }
 var chats = [
+    { id: 12, message: "Hola, ¿cómo estás?" },
+    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
+    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
+    { id: 12, message: "Hola, ¿cómo estás?" },
+    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
+    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
+    { id: 12, message: "Hola, ¿cómo estás?" },
+    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
+    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
+    { id: 12, message: "Hola, ¿cómo estás?" },
+    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
+    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
     { id: 12, message: "Hola, ¿cómo estás?" },
     { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
     { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" }

@@ -120,3 +120,13 @@ ul {
     background-color: #124878;
     margin-left: 3px;
 }
+
+h5{
+    color: #D7B860;
+    margin-bottom: 20px;
+}
+
+.list {
+    cursor: pointer;
+    border-bottom: #D7B860 1px solid;
+}
