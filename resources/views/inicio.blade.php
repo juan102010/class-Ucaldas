@@ -70,6 +70,7 @@
 
 </body>
 <script>
+    var chats = [];
     var id_seccion="12";
     function idSeccion() {
         
@@ -208,34 +209,47 @@ for (let i = 0; i < questions.length; i++) {
 }
 }
 
-function listarChats(){
-    chats.forEach(function(chat) {
-                            
-    $("#listChat").append('<p class="list" onclick="getChat(' + chat.id+ ', this)" >Chat: ' + chat.message + '</p>');
-
-    });
+function listarChats(chats){
+    
+    for (let i = 0; i < chats.length; i++) {
+        
+        $("#listChat").append('<p class="list" onclick="getChat(' + chats[i]+ ', this)" >Chat: ' + chats[i] + '</p>');
+    }
+    
 }
-var chats = [
-    { id: 12, message: "Hola, ¿cómo estás?" },
-    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
-    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
-    { id: 12, message: "Hola, ¿cómo estás?" },
-    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
-    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
-    { id: 12, message: "Hola, ¿cómo estás?" },
-    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
-    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
-    { id: 12, message: "Hola, ¿cómo estás?" },
-    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
-    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" },
-    { id: 12, message: "Hola, ¿cómo estás?" },
-    { id: 121, message: "¡Bien, gracias! ¿Y tú?" },
-    { id: 1211, message: "Muy bien, ¿en qué puedo ayudarte?" }
-    // Agrega más objetos de chat según sea necesario
-  ];
+
+function getSeccionID(){
+        var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb';
+  
+
+    // Construye la URL con los parámetros de consulta
+    var url = 'https://ucaldaschatia-production.up.railway.app/api/v1/completion/getids';
+   
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: 'application/json',
+        headers: {
+            'ApiKey': apiKey
+        },
+        success: function (response) {
+            console.log('Solicitud exitosa:', response);
+            // Puedes manejar la respuesta del servidor aquí
+            chats=response.Result.Data.CompletionIds
+            console.log('Solicitud exitosa:', chats);
+            listarChats(chats);
+        },
+        error: function (error) {
+            console.error('Error en la solicitud:', error);
+            // Puedes manejar el error aquí
+        }
+    });
+    }
 $(document).ready(function() {
+    getSeccionID();
     getChat(12);
-    listarChats();
+    
 });
 </script>
 
