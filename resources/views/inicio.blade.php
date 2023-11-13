@@ -15,18 +15,21 @@
     
 <!-- Contenedor principal del chat -->
 <div class="container">
-    <!-- Zona de chat -->
-    <div class="container">
+    
     <!-- Barra lateral izquierda (menú) -->
-    <div class="d-none d-md-block bg-dark text-white p-4" style="margin: 2px; float: left; width: 20%; height: calc(100vh - 90px);">
+    <div class="d-none d-md-block bg-dark text-white p-5" >
         <h5>Asistente Virtual</h5>
         <!-- Agrega aquí tus elementos de menú -->
+
         <ul class="list-unstyled">
             <!-- Elementos de menú -->
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Materias</a></li>
             <li><a href="#">Calificaciones</a></li>
+            
         </ul>
+        
+            <button class="btn btn-primary" type="button" onClick="idSeccion()">nuevo</button>
     </div>
 
     <!-- Zona de chat -->
@@ -46,7 +49,6 @@
             <input id="pregunta" type="text" class="form-control" placeholder="Escribe un mensaje..." id="user-message">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" onClick="postChat()">Enviar</button>
-                <button class="btn btn-primary" type="button" onClick="idSeccion()">nuevo</button>
             </div>
         </div>
     </div>
