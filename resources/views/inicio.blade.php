@@ -71,14 +71,18 @@
 </body>
 <script>
     var chats = [];
-    var id_seccion="12";
+    var id_seccion="1272";
     function idSeccion() {
         
         var prueba=id_seccion;
-        prueba=prueba+1;
+        var numeroAleatorio =Math.floor(Math.random() * 99) + 1;
+        prueba=prueba+numeroAleatorio.toString();
         id_seccion=prueba;
-        
         console.log(id_seccion);
+        postChatQuemado();
+        setTimeout(function() {
+            location.reload();
+    }, 10000);
     }
     function postChat(){
         var pregunta = $("#pregunta").val();
@@ -120,6 +124,44 @@
         }
         
     }
+    function postChatQuemado(){
+       
+        var headers = {
+                'ApiKey': 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb'
+            };
+        var datos = {
+                    "SeccionId": id_seccion,
+                    "Question": {
+                        "Messages": [
+                            {
+                                "role": "user",
+                                "content": "hola"
+                            }
+                        ]
+                    },
+                    "IncludeHistory": true
+            };
+     
+            $.ajax({
+                type: 'POST',
+                url: 'https://ucaldaschatia-production.up.railway.app/api/v1/completion',
+                data: JSON.stringify(datos), // Convertir a JSON
+                contentType: 'application/json', // Tipo de contenido
+                headers: headers,
+                success: function(response) {
+                    console.log('Solicitud exitosa:', response);
+                    
+                    // Se utiliza la función para mostrar la información
+                    mostrarInformacion(response);
+                },
+                error: function(error) {
+                    console.error('Error en la solicitud:', error);
+                    // Puedes manejar el error aquí
+                }
+            });
+        }
+        
+    
 
     function getChat(seccionid){
         var apiKey = 'b5435493-0e0e-4d06-89a0-bb0e99ae2afb';
@@ -142,6 +184,8 @@
             console.log('Solicitud exitosa:', response);
             // Puedes manejar la respuesta del servidor aquí
             mostrarInformacionInicio(response)
+            id_seccion=seccionid.toString();
+            console.log(id_seccion);
         },
         error: function (error) {
             console.error('Error en la solicitud:', error);
@@ -156,7 +200,6 @@
 
         // Limpia el contenido previo del div
         resultadoElement.innerHTML = '';
-
 
         const questions = data.Result.Data.AnswerResult.Questions;
         const answers = data.Result.Data.AnswerResult.Answers;
@@ -248,7 +291,7 @@ function getSeccionID(){
     }
 $(document).ready(function() {
     getSeccionID();
-    getChat(12);
+    getChat(id_seccion);
     
 });
 </script>
