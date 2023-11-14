@@ -14,9 +14,6 @@ use App\Http\Controllers\ChatController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/chatucaldas', function () {
     return view('inicio');
 });
-
-Route::get('/post', [ChatController::class, 'datapost']);
-Route::get('/get', [ChatController::class, 'dataget']);
